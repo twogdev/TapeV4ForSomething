@@ -56,7 +56,6 @@ local function finishLoading()
                 if shared.VapeDeveloper then
                     loadstring(readfile('newvape/loader.lua'), 'loader')()
                 else
-                    -- Redirected the server-hop teleport loader to your repository
                     loadstring(game:HttpGet('https://raw.githubusercontent.com/twogdev/TapeV4ForSomething/'..readfile('newvape/profiles/commit.txt')..'/loader.lua', true), 'loader')()
                 end
             ]]
@@ -92,16 +91,22 @@ shared.vape = vape
 
 if not shared.VapeIndependent then
     loadstring(downloadFile('newvape/games/universal.lua'), 'universal')()
-    if isfile('newvape/games/'..game.PlaceId..'.lua') then
-        loadstring(readfile('newvape/games/'..game.PlaceId..'.lua'), tostring(game.PlaceId))(...)
+    
+    -- Redirects all Bedwars match IDs to target your custom file
+    local gameFile = tostring(game.PlaceId)
+    if game.GameId == 2619088404 then
+        gameFile = "6872274481"
+    end
+
+    if isfile('newvape/games/'..gameFile..'.lua') then
+        loadstring(readfile('newvape/games/'..gameFile..'.lua'), gameFile)(...)
     else
         if not shared.VapeDeveloper then
             local suc, res = pcall(function()
-                -- Redirected the automatic game-script downloader to your repository
-                return game:HttpGet('https://raw.githubusercontent.com/twogdev/TapeV4ForSomething/'..readfile('newvape/profiles/commit.txt')..'/games/'..game.PlaceId..'.lua', true)
+                return game:HttpGet('https://raw.githubusercontent.com/twogdev/TapeV4ForSomething/'..readfile('newvape/profiles/commit.txt')..'/games/'..gameFile..'.lua', true)
             end)
             if suc and res ~= '404: Not Found' then
-                loadstring(downloadFile('newvape/games/'..game.PlaceId..'.lua'), tostring(game.PlaceId))(...)
+                loadstring(downloadFile('newvape/games/'..gameFile..'.lua'), gameFile)(...)
             end
         end
     end
