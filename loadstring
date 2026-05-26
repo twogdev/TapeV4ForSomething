@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/twogdev/TapeV4ForSomething/refs/heads/main/games/6872274481.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/twogdev/TapeV4ForSomething/main/NewMainScript.lua", true))()
