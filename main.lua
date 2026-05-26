@@ -92,9 +92,15 @@ shared.vape = vape
 if not shared.VapeIndependent then
     loadstring(downloadFile('newvape/games/universal.lua'), 'universal')()
     
-    -- Redirects all Bedwars match IDs to target your custom file
+    -- Thorough array tracking every Bedwars variation place ID
+    local bedwarsIds = {
+        [6872265039] = true,
+        [6872274481] = true,
+        [8444591321] = true,
+        [8560631822] = true
+    }
     local gameFile = tostring(game.PlaceId)
-    if game.GameId == 2619088404 then
+    if game.GameId == 2619619496 or bedwarsIds[game.PlaceId] then
         gameFile = "6872274481"
     end
 
